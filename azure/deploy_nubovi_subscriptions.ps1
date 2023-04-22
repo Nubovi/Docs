@@ -8,7 +8,7 @@ az login --tenant $tenantId
 # create new service principal
 $app=(az ad sp create-for-rbac -n "Nubovi Reader" | ConvertFrom-Json)
 # get all subscriptions in tenant
-$subscriptions=(az account list --query "[?tenantId == '$tenant'].id" | ConvertFrom-Json) 
+$subscriptions=(az account list --query "[?tenantId == '$tenantId'].id" | ConvertFrom-Json) 
 # for each subscription, assign built-in Reader role to service principal
 Foreach ($s in $subscriptions) 
 {
