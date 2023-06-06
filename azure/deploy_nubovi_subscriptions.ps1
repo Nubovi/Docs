@@ -14,6 +14,8 @@ Foreach ($s in $subscriptions)
 {
     az role assignment create --assignee $app.appId --role Reader --scope "/subscriptions/$s"
 }
+# Assign Reservations Reader role to the service principal at the tenant level
+az role assignment create --assignee $app.appId --role "Reservations Reader" --scope "/providers/Microsoft.Capacity"
 # retrieve app.tenant, app.appId and app.password in terminal
 Write-Host $app.tenant
 Write-Host $app.appId
