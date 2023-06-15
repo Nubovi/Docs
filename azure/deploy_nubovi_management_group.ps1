@@ -12,7 +12,10 @@ $groups=(az account management-group list --no-register | ConvertFrom-Json)
 # for each management group, assign built-in Reader role to service principal
 Foreach ($g in $groups) 
 {
-    az role assignment create --assignee $app.appId --role Reader --scope $g.id
+    # built-in reader role: https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader
+    az role assignment create --assignee $app.appId --role "Reader" --scope "/subscriptions/$s"
+    # built-in cost mangament contributor role: https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#cost-management-contributor
+    az role assignment create --assignee $app.appId --role "Cost Management Contributor" --scope "/subscriptions/$s"
 }
 # retrieve app.tenant, app.appId and app.password in terminal
 Write-Host $app.tenant
