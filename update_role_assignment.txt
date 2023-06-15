@@ -1,0 +1,6 @@
+# log into tenant
+$tenantId="<TENANT-ID>"
+$appId="<SERVICE-PRINCIPAL-APPID>"
+az login --tenant $tenantId
+# Assign Reservations Reader role to the existing service principal
+az role assignment create --assignee $appId --role "Reservations Reader" --scope "/providers/Microsoft.Capacity"
